@@ -1,6 +1,6 @@
 # Homework 7: Loot Generator  
 Created by: Ben Gafford [gaffordb], Bennet Hunter [hunterbe]  
-Program fights monsters and generates loot according to given files. More details about implementation can be found at:  
+Program fights monsters and generates loot by pulling data pseudorandomly from given files. More details about implementation can be found at:  
 http://www.cs.grinnell.edu/~osera/courses/csc207/17fa/homework/loot-generator.html  
 
 Sources:  
