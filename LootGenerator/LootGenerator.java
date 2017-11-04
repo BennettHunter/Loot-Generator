@@ -9,42 +9,6 @@ import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LootGenerator {
-	// public static void main(String[] args) throws FileNotFoundException {
-	// File monstersFile = new File("data/large/monstats.txt");
-	// File armorFile = new File("data/large/TreasureClassEx.txt");
-	// File armorFileStats = new File("data/large/armor.txt");
-	// File suffixFile = new File("data/large/MagicSuffix.txt");
-	// File prefixFile = new File("data/large/MagicPrefix.txt");
-	// boolean hasPrefix = ThreadLocalRandom.current().nextBoolean();
-	// boolean hasSuffix = ThreadLocalRandom.current().nextBoolean();
-	// String loot = "";
-	// String[] prefixData = { "", "", "" };
-	// String[] suffixData = { "", "", "" };
-	// Monster m = pickMonster(monstersFile);
-	//
-	// String item = fetchTreasureClass(m, armorFile);
-	// loot += item;
-	// if (hasPrefix) {
-	// prefixData = getAffix(prefixFile);
-	// loot = prefixData[0] + " " + loot;
-	// }
-	// if (hasSuffix) {
-	// suffixData = getAffix(suffixFile);
-	// loot = loot + " " + suffixData[0];
-	// }
-	// int baseS = generateBaseStats(item, armorFileStats);
-	//
-	// System.out.println("Fighting " + m.name);
-	// System.out.println("You have slain " + m.name + "!");
-	// System.out.println(m.name + " dropped: ");
-	// System.out.println();
-	//
-	// System.out.println(loot);
-	//
-	// System.out.println("Defense: " + baseS);
-	// System.out.println(prefixData[2] + " " + prefixData[1]);
-	// System.out.println(suffixData[2] + " " + suffixData[1]);
-	// }
 	public static void main(String[] args) throws FileNotFoundException {
 		File monstersFile = new File("data/large/monstats.txt");
 		File armorFile = new File("data/large/TreasureClassEx.txt");
@@ -59,7 +23,7 @@ public class LootGenerator {
 		s.close();
 	}
 
-	public static boolean prompt(Scanner s) {
+	private static boolean prompt(Scanner s) {
 		String input = "";
 		System.out.print("Fight again [y/n]? ");
 		input = s.nextLine();
@@ -73,7 +37,7 @@ public class LootGenerator {
 		}
 	}
 
-	public static void playGame(File monstersFile, File armorFile, File armorFileStats, File suffixFile,
+	private static void playGame(File monstersFile, File armorFile, File armorFileStats, File suffixFile,
 			File prefixFile) throws FileNotFoundException {
 		boolean hasPrefix = ThreadLocalRandom.current().nextBoolean();
 		boolean hasSuffix = ThreadLocalRandom.current().nextBoolean();
@@ -97,7 +61,7 @@ public class LootGenerator {
 		printLoot(prefixData, suffixData, baseStats, item);
 	}
 
-	public static void printLoot(String[] prefixData, String[] suffixData, int baseStats, String item) {
+	private static void printLoot(String[] prefixData, String[] suffixData, int baseStats, String item) {
 		prefixData[0] = prefixData[0].length() > 0 ? prefixData[0] + " " : prefixData[0]; // don't want those lame ass
 																							// spaces
 		String loot = prefixData[0] + item + " " + suffixData[0];
@@ -109,7 +73,7 @@ public class LootGenerator {
 		System.out.println(suffixData[2] + " " + suffixData[1]);
 	}
 
-	public static Monster pickMonster(File f) throws FileNotFoundException {
+	private static Monster pickMonster(File f) throws FileNotFoundException {
 		Scanner s = new Scanner(f);
 		ArrayList<String[]> monsters = new ArrayList<String[]>();
 		while (s.hasNext()) {
@@ -121,7 +85,7 @@ public class LootGenerator {
 		return new Monster(monsters.get(index)[0]);
 	}
 
-	public static String fetchTreasureClass(Monster m, File f) throws FileNotFoundException {
+	private static String fetchTreasureClass(Monster m, File f) throws FileNotFoundException {
 		Map<String, String[]> armorMap = new TreeMap<>();
 		Scanner s = new Scanner(f);
 
@@ -144,7 +108,7 @@ public class LootGenerator {
 		return curKey;
 	}
 
-	public static int generateBaseStats(String loot, File f) throws FileNotFoundException {
+	private static int generateBaseStats(String loot, File f) throws FileNotFoundException {
 		Scanner s = new Scanner(f);
 
 		while (s.hasNext()) {
@@ -161,7 +125,7 @@ public class LootGenerator {
 		throw new IllegalArgumentException();
 	}
 
-	public static String[] getAffix(File f) throws FileNotFoundException {
+	private static String[] getAffix(File f) throws FileNotFoundException {
 		Scanner s = new Scanner(f);
 		ArrayList<String[]> strArr = new ArrayList<String[]>();
 		while (s.hasNext()) {
